@@ -185,7 +185,7 @@ int main()
     srand((unsigned)time(NULL));
 
     vector<Data> data;
-    ReadFile("d://iris.data", data);
+    ReadFile("iris.data", data);
 
     int flag;
     cout << "输入1表示计算欧氏距离" << endl;
