@@ -180,6 +180,12 @@ void test(vector<Data> data, int flag, int k)
     cout << 1.0 * right / (wrong + right) * 100 << "%" << endl;
 }
 
+//预测新的数据
+void pre(vector<Data> data, Data new_data, int flag, int k)
+{
+    find_k_neighbours(new_data, data, flag, k);
+    cout << new_data.type << endl;
+}
 
 /*
 argc:参数个数(目前为5)(不用手传)
@@ -209,6 +215,35 @@ int main(int argc, char *argv[])
     ReadFile(file_name, data, pos);
 
     test(data, flag, k);
+
+    //询问用户是否想要预测新的数据
+    cout << "是否想要预测新的数据？" << endl;
+    cout << "是回答1,否则回答0:";
+    int new_test;
+    cin >> new_test;
+    if (new_test)
+    {
+        cout << "请在一行中输入您的测试数据(不包括type):";
+
+        string line;
+        cin >> line;
+        //将字符串分割的逗号换成空格,就可以利用流快速输入
+        for (int i = 0; i < line.size(); i ++ )
+            if (line[i] == ',') 
+            {
+                line[i] = ' ';
+            }
+
+        istringstream ssin(line);
+        Data new_data;
+        string s;
+        while (ssin >> s)
+        {
+            new_data.A.push_back(stof(s));
+        }
+        
+        pre(data, new_data, flag, k);
+    }
 
     return 0;
 }
